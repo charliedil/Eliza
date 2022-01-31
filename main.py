@@ -25,41 +25,22 @@ usrinput = input(f"[ELIZA]: Thank you, {name}. How can I help you today? Note- w
 while usrinput.upper()!="EXIT":
     original = usrinput.upper()
     usrinput = re.sub("[\.\,\?\!]","", original)
-    if(re.search("(^I\s)", original)):
-        usrinput = re.sub("(^I\s)", "YOU ", usrinput)
-    if(re.search("(\sI\s)", original)):
-        usrinput = re.sub("(\sI\s)", " YOU ", usrinput)
-    if(re.search("\sI$", original)):
-        usrinput = re.sub("\sI$", " YOU", usrinput)
-    if(re.search("(^MYSELF\s)",original)):
-        usrinput = re.sub("(^MYSELF\s)", "YOURSELF ", usrinput)
-    if(re.search("(\sMYSELF\s)",original)):
-        usrinput = re.sub("(\sMYSELF\s)", " YOURSELF ", usrinput)
-    if(re.search("\sMYSELF$",original)):
-        usrinput = re.sub("\sMYSELF$", " YOURSELF", usrinput)
-    if(re.search("(^ME\s)",original))
-        usrinput = re.sub("(^ME\s)", "YOU ", usrinput)
-    if(re.search("(\sME\s)",original)):
-        usrinput = re.sub("(\sME\s)", " YOU ", usrinput)
-    if(re.search("\sME$", original)):
-        usrinput = re.sub("\sME$", " YOU", usrinput)
-    if(re.search("(^MY\s)",original)):
-        usrinput = re.sub("(^MY\s)", "YOUR ", usrinput)
-    if(re.search("(\sMY\s)", original)):
-        usrinput = re.sub("(\sMY\s)", " YOUR ", usrinput)
-    usrinput = re.sub("\sMY$", " YOUR", usrinput)
-    usrinput = re.sub("(^YOURSELF\s)", "MYSELF ", usrinput)
-    usrinput = re.sub("(\sYOURSELF\s)", " MYSELF ", usrinput)
-    usrinput = re.sub("\sYOURSELF$", " MYSELF", usrinput)
-    usrinput = re.sub("(^YOU\s)", "I ", usrinput)
-    usrinput = re.sub("(\sYOU\s)", " I ", usrinput)
-    usrinput = re.sub("\sYOU$", " ME", usrinput)
-    usrinput = re.sub("(^YOUR\s)", "MY ", usrinput)
-    usrinput = re.sub("(\sYOUR\s)", " MY ", usrinput)
-    usrinput = re.sub("\sYOUR$", " MY", usrinput)
-    usrinput = re.sub("(^ARE\s)", "YOURSELF ", usrinput)
-    usrinput = re.sub("(\sMYSELF\s)", " YOURSELF ", usrinput)
-    usrinput = re.sub("\sMYSELF$", " YOURSELF", usrinput)
+    if(re.search(r"\bI\b", original)):
+        usrinput = re.sub(r"\bI\b", "YOU", usrinput)
+    if(re.search("(\bMYSELF\b)",original)):
+        usrinput = re.sub("(\bMYSELF\b)", "YOURSELF", usrinput)
+    if(re.search("(\bME\b)",original)):
+        usrinput = re.sub("(\bME\b)", "YOU", usrinput)
+    if(re.search("(\bMY\b)",original)):
+        usrinput = re.sub("(\bMY\b)", "YOUR", usrinput)
+    if(re.search("\bYOURSELF\b", original)):
+        usrinput = re.sub("(\bYOURSELF\b)", "MYSELF", usrinput)
+    if(re.search("\bYOU\b", original)):
+        usrinput = re.sub("(\bYOU\b)", "I", usrinput)
+    if(re.search("\bYOUR\b", original)):
+        usrinput = re.sub("(\bYOUR\b)", "MY", usrinput)
+
+
 
     print(usrinput)
     being_test_present = re.search("^YOU\sAM(.*)", usrinput)

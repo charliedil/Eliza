@@ -5,7 +5,7 @@ import re
 subj = ""
 obj = ""
 name = input("[ELIZA]: Hi! My name is ELIZA. It's nice to meet you. What should I call you?\n")
-being_test_present_answers = ["You are", "Why are you", "What makes you", "Do you know why you", "Can you tell me more about why you"]
+being_test_present_answers = ["You are", "Why are you", "What makes you", "Do you know why you are", "Can you tell me more about why you are"]
 being_test_past_answers = ["You were", "Are you still", "Why were you"]
 being_test_future_answers = ["Why do you think you will", "You will", "When will you"]
 rev_being_test_present_answers = ["You think I am", "What makes you think I am"]
@@ -27,22 +27,22 @@ while usrinput.upper()!="EXIT":
     usrinput = re.sub("[\.\,\?\!]","", original)
     if(re.search(r"\bI\b", original)):
         usrinput = re.sub(r"\bI\b", "YOU", usrinput)
-    if(re.search("(\bMYSELF\b)",original)):
-        usrinput = re.sub("(\bMYSELF\b)", "YOURSELF", usrinput)
-    if(re.search("(\bME\b)",original)):
-        usrinput = re.sub("(\bME\b)", "YOU", usrinput)
-    if(re.search("(\bMY\b)",original)):
-        usrinput = re.sub("(\bMY\b)", "YOUR", usrinput)
-    if(re.search("\bYOURSELF\b", original)):
-        usrinput = re.sub("(\bYOURSELF\b)", "MYSELF", usrinput)
-    if(re.search("\bYOU\b", original)):
-        usrinput = re.sub("(\bYOU\b)", "I", usrinput)
-    if(re.search("\bYOUR\b", original)):
-        usrinput = re.sub("(\bYOUR\b)", "MY", usrinput)
+    if(re.search("r(\bMYSELF\b)",original)):
+        usrinput = re.sub(r"(\bMYSELF\b)", "YOURSELF", usrinput)
+    if(re.search(r"(\bME\b)",original)):
+        usrinput = re.sub(r"(\bME\b)", "YOU", usrinput)
+    if(re.search(r"(\bMY\b)",original)):
+        usrinput = re.sub(r"(\bMY\b)", "YOUR", usrinput)
+    if(re.search(r"\bYOURSELF\b", original)):
+        usrinput = re.sub(r"(\bYOURSELF\b)", "MYSELF", usrinput)
+    if(re.search(r"\bYOU\b", original)):
+        usrinput = re.sub(r"(\bYOU\b)", "I", usrinput)
+    if(re.search(r"\bYOUR\b", original)):
+        usrinput = re.sub(r"(\bYOUR\b)", "MY", usrinput)
 
 
 
-    print(usrinput)
+    # print(usrinput)
     being_test_present = re.search("^YOU\sAM(.*)", usrinput)
     being_test_past = re.search("^YOU\sWAS(.*)", usrinput)
     being_test_future = re.search("^YOU\sWILL(.*)", usrinput)
@@ -50,8 +50,13 @@ while usrinput.upper()!="EXIT":
     rev_being_test_past = re.search("^I\sWERE(.*)", usrinput)
     rev_being_test_future = re.search("^I\sWILL(.*)", usrinput)
     if(being_test_present):
-        usrinput = input(f"[ELIZA]: {being_test_present_answers[random.randint(0,len(being_test_present_answers)-1)]}{being_test_present.group(1)}\n[{name}]: ")
-
+        usrinput = input(f"[ELIZA]: {being_test_present_answers[random.randint(0,len(being_test_present_answers)-1)]}{being_test_present.group(1).lower()}\n[{name}]: ")
+    elif(being_test_past):
+        usrinput = input(f"[ELIZA]: {being_test_past_answers[random.randint(0,len(rev_being_test_past_answers)-1)]}{being_test_past.group(1).lower()}\n[{name}]: ")
+    elif(being_test_future):
+        usrinput = input(f"[ELIZA]: {being_test_future_answers[random.randint(0, len(rev_being_test_future_answers)-1)]}{being_test_future.group(1).lower()}\n[{name}]: ")
+    elif(rev_being_test_present):
+        usrinput = input(f"[ELIZA]: {rev_being_test_present_answers[random.randint(0,len(rev_being_test_present_answers)-1)]}{rev_being_test_present.group(1).lower()}\n[{name}]: ")
     else:
         usrinput=input(f"[ELIZA]: I see.\n[{name}]: ")
 print("Goodbye!")

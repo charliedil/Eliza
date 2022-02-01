@@ -56,7 +56,7 @@ while usrinput.upper()!="EXIT":
     suicidality_test = re.search(r"\bSUICIDAL\b", usrinput)
     thanks_sorry_test = re.search(r"\bSORRY\b|\bTHANK\b|\bTHANKS\b", usrinput)
     pronouns_test = re.search(r"(^SHE|^HE|^THEY|^ZE)(.*)", usrinput)
-    want_need_test = re/search(r"^(I WANT)")
+    want_need_test = re.search(r"^(I WANT)")
     if(suicidality_test):
         usrinput = input(f"[ELIZA]: It seems like you may be feeling some strong emotions right now. You are very brave for being honest with me. \nHere is a number for you to call that may be more help than I can be: 800-273-8255.\n[{name}]: ")
     elif(thanks_sorry_test):

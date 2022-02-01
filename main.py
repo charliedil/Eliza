@@ -57,6 +57,10 @@ while usrinput.upper()!="EXIT":
         usrinput = input(f"[ELIZA]: {being_test_future_answers[random.randint(0, len(rev_being_test_future_answers)-1)]}{being_test_future.group(1).lower()}\n[{name}]: ")
     elif(rev_being_test_present):
         usrinput = input(f"[ELIZA]: {rev_being_test_present_answers[random.randint(0,len(rev_being_test_present_answers)-1)]}{rev_being_test_present.group(1).lower()}\n[{name}]: ")
+    elif(rev_being_test_past):
+        usrinput = input(f"[ELIZA]: {rev_being_test_past_answers[random.randint(0,len(rev_being_test_past_answers)-1)]}{rev_being_test_past.group(1).lower()}\n[{name}]: ")
+    elif(rev_being_test_future):
+        usrinput = input(f"[ELIZA]: {rev_being_test_future_answers[random.randint(0, len(rev_being_test_future_answers)-1)]}{rev_being_test_future.group(1).lower()}\n[{name}]: ")
     else:
         usrinput=input(f"[ELIZA]: I see.\n[{name}]: ")
-print("Goodbye!")
+print("[ELIZA]: Goodbye!")

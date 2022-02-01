@@ -11,6 +11,8 @@ being_test_future_answers = ["Why do you think you will", "You will", "When will
 rev_being_test_present_answers = ["You think I am", "What makes you think I am"]
 rev_being_test_past_answers = ["You think I was", "How do you know I was", "What makes you think I was"]
 rev_being_test_future_answers = ["You think I will", "What makes you think I will", "How do you know I will"]
+pronouns_test_answers = ["Why do you think", "What makes you think", "How do you know"]
+
 defaultanswers = ["I see", "What else is on your mind?", "I don't really understand"]
 pronouns = input(f"[ELIZA]: It is very nice to meet you {name}! I am looking forward to getting to know you\n"
             f"Please specify your pronouns in the format: subject/object. \nFor example, "
@@ -49,7 +51,21 @@ while usrinput.upper()!="EXIT":
     rev_being_test_present = re.search("^I\sARE(.*)", usrinput)
     rev_being_test_past = re.search("^I\sWERE(.*)", usrinput)
     rev_being_test_future = re.search("^I\sWILL(.*)", usrinput)
-    if(being_test_present):
+    absolute_test = re.search(r"(\bALWAYS\b|\bNEVER\b|\bNOBODY\b|\bEVERYBODY\b|\bEVERYONE\b|\bANYONE\b|\bANYBODY\b)", usrinput)
+    hate_or_love_test = re.search(r"\bHATES*\b|\bLOVES*\b", usrinput)
+    suicidality_test = re.search(r"\bSUICIDAL\b", usrinput)
+    thanks_sorry_test = re.search(r"\bSORRY\b|\bTHANK\b|\bTHANKS\b", usrinput)
+    pronouns_test = re.search(r"(^SHE|^HE|^THEY|^ZE)(.*)", usrinput)
+    want_need_test = re/search(r"^(I WANT)")
+    if(suicidality_test):
+        usrinput = input(f"[ELIZA]: It seems like you may be feeling some strong emotions right now. You are very brave for being honest with me. \nHere is a number for you to call that may be more help than I can be: 800-273-8255.\n[{name}]: ")
+    elif(thanks_sorry_test):
+        usrinput = input(f"[ELIZA]: That's what I'm here for, {name}.\n[{name}]: ")
+    elif(absolute_test):
+        usrinput = input(f"[ELIZA]: {absolute_test.group(1).lower().capitalize()}?\n[{name}]: ")
+    elif(hate_or_love_test):
+        usrinput = input(f"[ELIZA]: Why do you say the word {hate_or_love_test.group(0).lower()}? What made you choose this word as opposed to a different one?\n[{name}]: ")
+    elif(being_test_present):
         usrinput = input(f"[ELIZA]: {being_test_present_answers[random.randint(0,len(being_test_present_answers)-1)]}{being_test_present.group(1).lower()}\n[{name}]: ")
     elif(being_test_past):
         usrinput = input(f"[ELIZA]: {being_test_past_answers[random.randint(0,len(rev_being_test_past_answers)-1)]}{being_test_past.group(1).lower()}\n[{name}]: ")
@@ -61,6 +77,8 @@ while usrinput.upper()!="EXIT":
         usrinput = input(f"[ELIZA]: {rev_being_test_past_answers[random.randint(0,len(rev_being_test_past_answers)-1)]}{rev_being_test_past.group(1).lower()}\n[{name}]: ")
     elif(rev_being_test_future):
         usrinput = input(f"[ELIZA]: {rev_being_test_future_answers[random.randint(0, len(rev_being_test_future_answers)-1)]}{rev_being_test_future.group(1).lower()}\n[{name}]: ")
+    elif(pronouns_test):
+        usrinput = input(f"[ELIZA]: {pronouns_test_answers[random.randint(0,len(pronouns_test_answers)-1)]} {pronouns_test.group(1).lower()}{pronouns_test.group(2).lower()}?\n[{name}]: ")
     else:
-        usrinput=input(f"[ELIZA]: I see.\n[{name}]: ")
+        usrinput=input(f"[ELIZA]: {defaultanswers[random.randint(0,len(defaultanswers)-1)]}\n[{name}]: ")
 print("[ELIZA]: Goodbye!")

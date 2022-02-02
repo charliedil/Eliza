@@ -56,9 +56,18 @@ while usrinput.upper()!="EXIT":
     suicidality_test = re.search(r"\bSUICIDAL\b", usrinput)
     thanks_sorry_test = re.search(r"\bSORRY\b|\bTHANK\b|\bTHANKS\b", usrinput)
     pronouns_test = re.search(r"(^SHE|^HE|^THEY|^ZE)(.*)", usrinput)
-    want_need_test = re.search(r"^(I WANT)")
+    want_need_test = re.search(r"^(YOU WANT)(.*)|^(YOU NEED)(.*)", usrinput)
+    family_test = re.search(r"(\bFATHER\b)|(\bMOTHER\b)|(\bDAD\b)|(\bMOM\b)|(\bBROTHER\b)|(\bSIBLING\b)|(\bSISTER\b)|(\bGRANDMA\b)|(\bGRANDMOTHER\b)|(\bGRANDFATHER\b)|(\bGRANDPA\b)|(\bAUNT\b)|(\bUNCLE\b)|(\bHUSBAND\b)|(\bWIFE\b)|(\bSPOUSE\b)|(\bPARENT\b)", usrinput)
+    judgement_words = re.search(r"\bSTUPID\b|\bUGLY\b|\bANNOYING\b", usrinput)
+    fail_safe = re.search(r"\bI\b|\bYOU\b|\bME\b|\bMYSELF\b|\bMY\b|\bYOUR\b|\bYOURSELF\b", usrinput)
     if(suicidality_test):
         usrinput = input(f"[ELIZA]: It seems like you may be feeling some strong emotions right now. You are very brave for being honest with me. \nHere is a number for you to call that may be more help than I can be: 800-273-8255.\n[{name}]: ")
+    elif(want_need_test):
+        usrinput = input(f"[ELIZA]: Where do you think this desire to have {want_need_test.group(2).lower()} stems from?\n[{name}]: ")
+    elif(family_test):
+        usrinput = input(f"[ELIZA]: Can you tell me more about your {family_test.group(1).lower()}\n[{name}]: ")
+    elif(judgement_words):
+        usrinput = input(f"[ELIZA]: That was a judgement statement. Can you rephrase that sentence without judgement?\n[{name}]: ")
     elif(thanks_sorry_test):
         usrinput = input(f"[ELIZA]: That's what I'm here for, {name}.\n[{name}]: ")
     elif(absolute_test):
@@ -79,6 +88,8 @@ while usrinput.upper()!="EXIT":
         usrinput = input(f"[ELIZA]: {rev_being_test_future_answers[random.randint(0, len(rev_being_test_future_answers)-1)]}{rev_being_test_future.group(1).lower()}\n[{name}]: ")
     elif(pronouns_test):
         usrinput = input(f"[ELIZA]: {pronouns_test_answers[random.randint(0,len(pronouns_test_answers)-1)]} {pronouns_test.group(1).lower()}{pronouns_test.group(2).lower()}?\n[{name}]: ")
+    elif(fail_safe):
+        usrinput = input(f"[ELIZA]: {usrinput.lower()}\n[{name}]: ")
     else:
         usrinput=input(f"[ELIZA]: {defaultanswers[random.randint(0,len(defaultanswers)-1)]}\n[{name}]: ")
 print("[ELIZA]: Goodbye!")

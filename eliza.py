@@ -1,4 +1,9 @@
-#  Hi! This is my ELIZA program. Work in progress for sure.
+"""
+ELIZA - The Charlie edition
+The problem we seek to solve is to create an AI system that utilizes RegEx's (pattern matching to ask questions and engage with the user
+by identifying key phrases and restructuring the user's sentence based on that.
+
+"""
 import random
 import re
 

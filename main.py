@@ -29,7 +29,7 @@ while usrinput.upper()!="EXIT":
     usrinput = re.sub("[\.\,\?\!]","", original)
     if(re.search(r"\bI\b", original)):
         usrinput = re.sub(r"\bI\b", "YOU", usrinput)
-    if(re.search("r(\bMYSELF\b)",original)):
+    if(re.search(r"(\bMYSELF\b)",original)):
         usrinput = re.sub(r"(\bMYSELF\b)", "YOURSELF", usrinput)
     if(re.search(r"(\bME\b)",original)):
         usrinput = re.sub(r"(\bME\b)", "YOU", usrinput)
@@ -45,19 +45,19 @@ while usrinput.upper()!="EXIT":
 
 
     # print(usrinput)
-    being_test_present = re.search("^YOU\sAM(.*)", usrinput)
-    being_test_past = re.search("^YOU\sWAS(.*)", usrinput)
-    being_test_future = re.search("^YOU\sWILL(.*)", usrinput)
-    rev_being_test_present = re.search("^I\sARE(.*)", usrinput)
-    rev_being_test_past = re.search("^I\sWERE(.*)", usrinput)
-    rev_being_test_future = re.search("^I\sWILL(.*)", usrinput)
+    being_test_present = re.search(r"^YOU\sAM(.*)", usrinput)
+    being_test_past = re.search(r"^YOU\sWAS(.*)", usrinput)
+    being_test_future = re.search(r"^YOU\sWILL(.*)", usrinput)
+    rev_being_test_present = re.search(r"^I\sARE(.*)", usrinput)
+    rev_being_test_past = re.search(r"^I\sWERE(.*)", usrinput)
+    rev_being_test_future = re.search(r"^I\sWILL(.*)", usrinput)
     absolute_test = re.search(r"(\bALWAYS\b|\bNEVER\b|\bNOBODY\b|\bEVERYBODY\b|\bEVERYONE\b|\bANYONE\b|\bANYBODY\b)", usrinput)
     hate_or_love_test = re.search(r"\bHATES*\b|\bLOVES*\b", usrinput)
     suicidality_test = re.search(r"\bSUICIDAL\b", usrinput)
     thanks_sorry_test = re.search(r"\bSORRY\b|\bTHANK\b|\bTHANKS\b", usrinput)
     pronouns_test = re.search(r"(^SHE|^HE|^THEY|^ZE)(.*)", usrinput)
     want_need_test = re.search(r"^(YOU WANT)(.*)|^(YOU NEED)(.*)", usrinput)
-    family_test = re.search(r"(\bFATHER\b)|(\bMOTHER\b)|(\bDAD\b)|(\bMOM\b)|(\bBROTHER\b)|(\bSIBLING\b)|(\bSISTER\b)|(\bGRANDMA\b)|(\bGRANDMOTHER\b)|(\bGRANDFATHER\b)|(\bGRANDPA\b)|(\bAUNT\b)|(\bUNCLE\b)|(\bHUSBAND\b)|(\bWIFE\b)|(\bSPOUSE\b)|(\bPARENT\b)", usrinput)
+    family_test = re.search(r"(\bFATHER\b|\bMOTHER\b|\bDAD\b|\bMOM\b|\bBROTHER\b|\bSIBLING\b|\bSISTER\b|\bGRANDMA\b|\bGRANDMOTHER\b|\bGRANDFATHER\b|\bGRANDPA\b|\bAUNT\b|\bUNCLE\b|\bHUSBAND\b|\bWIFE\b|\bSPOUSE\b|\bPARENT\b)", usrinput)
     judgement_words = re.search(r"\bSTUPID\b|\bUGLY\b|\bANNOYING\b", usrinput)
     fail_safe = re.search(r"\bI\b|\bYOU\b|\bME\b|\bMYSELF\b|\bMY\b|\bYOUR\b|\bYOURSELF\b", usrinput)
     if(suicidality_test):

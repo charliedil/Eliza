@@ -56,14 +56,14 @@ while usrinput.upper()!="EXIT":
     suicidality_test = re.search(r"\bSUICIDAL\b", usrinput)
     thanks_sorry_test = re.search(r"\bSORRY\b|\bTHANK\b|\bTHANKS\b", usrinput)
     pronouns_test = re.search(r"(^SHE|^HE|^THEY|^ZE)(.*)", usrinput)
-    want_need_test = re.search(r"^(YOU WANT)(.*)|^(YOU NEED)(.*)", usrinput)
+    want_need_test = re.search(r"(^YOU WANT|^YOU NEED|^YOU CRAVE)(.*)", usrinput)
     family_test = re.search(r"(\bFATHER\b|\bMOTHER\b|\bDAD\b|\bMOM\b|\bBROTHER\b|\bSIBLING\b|\bSISTER\b|\bGRANDMA\b|\bGRANDMOTHER\b|\bGRANDFATHER\b|\bGRANDPA\b|\bAUNT\b|\bUNCLE\b|\bHUSBAND\b|\bWIFE\b|\bSPOUSE\b|\bPARENT\b)", usrinput)
     judgement_words = re.search(r"\bSTUPID\b|\bUGLY\b|\bANNOYING\b", usrinput)
     fail_safe = re.search(r"\bI\b|\bYOU\b|\bME\b|\bMYSELF\b|\bMY\b|\bYOUR\b|\bYOURSELF\b", usrinput)
     if(suicidality_test):
         usrinput = input(f"[ELIZA]: It seems like you may be feeling some strong emotions right now. You are very brave for being honest with me. \nHere is a number for you to call that may be more help than I can be: 800-273-8255.\n[{name}]: ")
     elif(want_need_test):
-        usrinput = input(f"[ELIZA]: Where do you think this desire to have {want_need_test.group(2).lower()} stems from?\n[{name}]: ")
+        usrinput = input(f"[ELIZA]: Where do you think this desire to have{want_need_test.group(2).lower()} stems from?\n[{name}]: ")
     elif(family_test):
         usrinput = input(f"[ELIZA]: Can you tell me more about your {family_test.group(1).lower()}\n[{name}]: ")
     elif(judgement_words):

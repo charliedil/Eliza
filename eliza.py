@@ -1,8 +1,49 @@
 """
 ELIZA - The Charlie edition
-The problem we seek to solve is to create an AI system that utilizes RegEx's (pattern matching to ask questions and engage with the user
-by identifying key phrases and restructuring the user's sentence based on that.
+The problem we seek to solve is to create an AI system that utilizes RegEx's (pattern matching) to ask questions and
+engage with the user by identifying key phrases and restructuring the user's sentence based on that.
 
+USAGE
+When you first run the ELIZA script, you will first be prompted for your name. After this you will be prompted for your
+pronouns. Your name will be used only in a few responses. Pronouns are not used at all as of now, ideally this will be
+implemented in the future somehow. Once you have provided these responses, feel free to interact with ELIZA as you see
+fit. ELIZA prefers DBT over CBT, so if she detects judgement statements, she will ask you to rephrase. When you are
+finished with ELIZA, enter "exit".
+
+EXAMPLE
+[ELIZA]: Hi! My name is ELIZA. It's nice to meet you. What should I call you?
+Charlie
+[ELIZA]: It is very nice to meet you Charlie! I am looking forward to getting to know you
+Please specify your pronouns in the format: subject/object.
+For example, my pronouns are ze/zir. Other examples of pronoun sets are he/him, she/her, and they/them.
+[Charlie]: he/him
+[ELIZA]: Thank you, Charlie. How can I help you today? Note- when you are ready to end our
+conversation, please type and enter "exit" by itself.
+[Charlie]: I am ugly
+[ELIZA]: That was a judgement statement. Can you rephrase that sentence without judgement?
+[Charlie]: I am sorry
+[ELIZA]: That's what I'm here for, Charlie.
+[Charlie]: I am not happy with how I look
+[ELIZA]: You are not happy with how you look
+...
+[Charlie]: exit
+[ELIZA]: Goodbye!
+
+ALGORITHM
+The algorithm I implemented is rather basic. First, personal nouns like "I", "me", and "you" are substituted with the
+opposite form. That is to say, "I" is replaced with "you", "you" is replaced with "me", etc. Once this substitution is
+made, a series of pattern tests are run to detect different sentence structures or keywords. Depending on which pattern
+test passes first, a response will be sent. For some patterns, like a sentence that begins with "YOU AM" (this is after
+substitution, so the original sentence starts with "I AM") there are multiple possible responses that are picked by
+picking a random integer. Some pattern or keyword matches have just one possible response. For example. I have coded
+the keyword "suicidal" such that when this keyword occurs ELIZA automatically provides the suicide helpline number.
+If no tests pass and there is a personal noun in the sentence, ELIZA will simply output the sentence after the
+inital transformation. Example: Do you hate me -> Do I hate you?. If there are no personal nouns, then ELIZA will
+use one of the default, context-free answers.
+These checks are all coded in a while loop that terminates upon when the user inputs "exit".
+
+VERSION
+Python 3.10.0
 """
 import random
 import re
@@ -32,6 +73,7 @@ usrinput = input(f"[ELIZA]: Thank you, {name}. How can I help you today? Note- w
 while usrinput.upper()!="EXIT":
     original = usrinput.upper()
     usrinput = re.sub("[\.\,\?\!]","", original)
+    sentfrags = []
     if(re.search(r"\bI\b", original)):
         usrinput = re.sub(r"\bI\b", "YOU", usrinput)
     if(re.search(r"(\bMYSELF\b)",original)):

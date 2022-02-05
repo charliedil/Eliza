@@ -74,21 +74,16 @@ while usrinput.upper()!="EXIT":
     original = usrinput.upper()
     usrinput = re.sub("[\.\,\?\!]","", original)
     sentfrags = []
-    if(re.search(r"\bI\b", original)):
-        usrinput = re.sub(r"\bI\b", "YOU", usrinput)
-    if(re.search(r"(\bMYSELF\b)",original)):
-        usrinput = re.sub(r"(\bMYSELF\b)", "YOURSELF", usrinput)
-    if(re.search(r"(\bME\b)",original)):
-        usrinput = re.sub(r"(\bME\b)", "YOU", usrinput)
-    if(re.search(r"(\bMY\b)",original)):
-        usrinput = re.sub(r"(\bMY\b)", "YOUR", usrinput)
-    if(re.search(r"\bYOURSELF\b", original)):
-        usrinput = re.sub(r"(\bYOURSELF\b)", "MYSELF", usrinput)
-    if(re.search(r"\bYOU\b", original)):
-        usrinput = re.sub(r"(\bYOU\b)", "I", usrinput)
-    if(re.search(r"\bYOUR\b", original)):
-        usrinput = re.sub(r"(\bYOUR\b)", "MY", usrinput)
+    personalNouns = {"I":"YOU", "MYSELF":"YOURSELF","ME":"YOU","MY":"YOUR","YOURSELF":"MYSELF","YOU":"I", "YOUR":"MY"}
 
+    sentfrags = usrinput.split(" ")
+    for s in range(len(sentfrags)):
+        if sentfrags[s] in personalNouns:
+            sentfrags[s] = personalNouns[sentfrags[s]]
+    usrinput = ""
+    for s in sentfrags:
+        usrinput+= s
+        usrinput+=" "
 
 
     # print(usrinput)
